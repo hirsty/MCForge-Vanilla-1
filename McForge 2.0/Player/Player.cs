@@ -1120,6 +1120,7 @@ namespace MCForge
         }
 		#endregion
 
+		public static string currNum { get {return Server.Players.ToArray().LongLength.ToString();} }
 	}
 
 	public struct packet

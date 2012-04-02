@@ -21,12 +21,21 @@ using System.Threading;
 using System.Collections.Generic;
 using System.Timers;
 using System.IO;
+using MCForge.Beat;
 
 namespace MCForge
 {
     public static class Server
     {
-        /// <summary>
+		/// <summary>
+		/// Gets or sets the server's hash
+		/// </summary>
+		public static string Hash { get; set; }
+		/// <summary>
+		/// Gets or sets the server's current URL
+		/// </summary>
+		public static string URL { get; set; }
+		/// <summary>
         /// Get whether the server is currently shutting down
         /// </summary>
         public static bool shuttingDown;
@@ -49,7 +58,7 @@ namespace MCForge
         /// <summary>
         /// The list of MCForge developers.
         /// </summary>
-        public static List<string> devs = new List<string>(new string[] { "EricKilla", "Merlin33069", "Snowl", "Gamemakergm", "cazzar", "hirsty", "Givo", "jasonbay13", "Alem_Zupa", "7imekeeper", "Shade2010", "TheMusiKid" });
+        public static List<string> devs = new List<string>(new string[] { "EricKilla", "Merlin33069", "Snowl", "Gamemakergm", "cazzar", "hirsty", "Givo", "jasonbay13", "Alem_Zupa", "7imekeeper", "Shade2010", "TheMusiKid", "Nerketur"});
         /// <summary>
         /// List of players that agreed to the rules
         /// </summary>
@@ -87,10 +96,11 @@ namespace MCForge
 
         internal static void Init()
         {
-            StartListening();
+            Log("Creating listening socket on port " + ServerSettings.port + "... ");
+			StartListening();
+			Log("Done.");
 
             Mainlevel = Level.CreateLevel(new Point3(256, 256, 64), Level.LevelTypes.Flat, "main");
-
 
             UpdateTimer = new System.Timers.Timer(100);
             UpdateTimer.Elapsed += delegate { Update(); };
@@ -114,6 +124,12 @@ namespace MCForge
                 foreach (string pl in lines) { agreed.Add(pl); }
             }
             catch { Log("[Error] Error reading agreed players!", ConsoleColor.Red, ConsoleColor.Black); }
+			try {
+				Heart.Init();
+			} catch (Exception e) {
+				Server.Log(e);
+			}
+
         }
 
         static void Update()
@@ -190,5 +206,5 @@ namespace MCForge
             Console.ResetColor();
         }
         #endregion
-    }
+	}
 }

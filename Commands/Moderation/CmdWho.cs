@@ -27,29 +27,33 @@ namespace CommandDll.Moderation {
             //We can get an IP, or a name.
             //Because of the fact IPs can give multiple names, we will show all possibilities.
             //Plus, people can have a name that's identical to an IP.
-            if (Player.ValidName(args[0])) {
-                // Is it an online player?
-                Player found = Player.Find(args[0]);
-                if (found == null) {
-                    //The player is offline/nonexistant
-                }
-                if (found == null) {
-                    p.SendMessage("The specified player is not online.");
-                } else {
-                    p.SendMessage(found.USERNAME + " is on " + found.level.name);
-                    //p.SendMessage(found.title + " " + found.USERNAME + " has:");
-                    //p.SendMessage("> the rank of " + found.group.name);
-                    //p.SendMessage("> modified " + found.allmodified + " blocks and " + found.modified + " were changed since logging in.");
-                    //p.SendMessage("> time spent on server: " + found.totalTimeOnline);
-                    //p.SendMessage("> been logged in for " + found.timeLoggedOn);
-                    //p.SendMessage("> First logged into the server on " + found.firstLogin);
-                    //p.SendMessage("> Logged in " + found.timesOnline + " times, " + found.timesKicked + " of which ended in a kick.");
-                    //p.SendMessage("> " + found.numAwarded + "/" + Server.numAwards + " awards.");
-                    p.SendMessage("> the IP of " + found.ip);
-                    if (Server.devs.Contains(found.USERNAME))
-                        p.SendMessage("> Player is a Developer.");
-                }
-            }
+			if (args.Length == 0)
+				Help(p);
+			else if (Player.ValidName(args[0])) {
+				// Is it an online player?
+				Player found = Player.Find(args[0]);
+				if (found == null) {
+					//The player is offline/nonexistant
+				}
+				if (found == null) {
+					p.SendMessage("The specified player is not online.");
+				} else {
+					p.SendMessage(found.USERNAME + " is on " + found.level.name);
+					//p.SendMessage(found.title + " " + found.USERNAME + " has:");
+					//p.SendMessage("> the rank of " + found.group.name);
+					//p.SendMessage("> modified " + found.allmodified + " blocks and " + found.modified + " were changed since logging in.");
+					//p.SendMessage("> time spent on server: " + found.totalTimeOnline);
+					//p.SendMessage("> been logged in for " + found.timeLoggedOn);
+					//p.SendMessage("> First logged into the server on " + found.firstLogin);
+					//p.SendMessage("> Logged in " + found.timesOnline + " times, " + found.timesKicked + " of which ended in a kick.");
+					//p.SendMessage("> " + found.numAwarded + "/" + Server.numAwards + " awards.");
+					p.SendMessage("> the IP of " + found.ip);
+					if (Server.devs.Contains(found.USERNAME))
+						p.SendMessage("> Player is a Developer.");
+				}
+			} else {
+				Help(p);
+			}
         }
 
         public void Help(Player p) {

@@ -37,6 +37,8 @@ namespace MCForge
 		public static string NAME = "Test Server... +hax";
 
         public static bool EnableGUI = true;
+		public static bool logbeat = false;
+		public static bool isPublic = true;
 
         public void Load()
         {
