@@ -42,6 +42,11 @@ namespace MCForge
 		/// <param name="pos">the loops current block position (pos)</param>
 		public delegate void ForEachBlockDelegate(int pos);
 
+		/// <summary>
+		/// Get or set the name of the level.
+		/// </summary>
+		public string name { get; set; }
+		
 		int _TotalBlocks;
 		/// <summary>
 		/// Get the total blocks in the level
@@ -80,12 +85,25 @@ namespace MCForge
 		}
 
 		/// <summary>
+		/// Create a level with a specified type, size, and name
+		/// </summary>
+		/// <param name="size">The size to create the level.</param>
+		/// <param name="type">The type of the level you want to create</param>
+		/// <param name="name">The name of the level you want to create</param>
+		/// <returns>returns the level that was created</returns>
+		public static Level CreateLevel(Point3 size, LevelTypes type, string name) {
+			Level l = CreateLevel(size, type);
+			l.name = name;
+			return l;
+		}
+
+		/// <summary>
 		/// Create a level with a specified type and a specified size
 		/// </summary>
 		/// <param name="size">The size to create the level.</param>
 		/// <param name="type">The type of the level you want to create</param>
 		/// <returns>returns the level that was created</returns>
-		public static Level CreateLevel(Point3 size, LevelTypes type)
+		private static Level CreateLevel(Point3 size, LevelTypes type)
 		{
 			Level newlevel = new Level(size);
 

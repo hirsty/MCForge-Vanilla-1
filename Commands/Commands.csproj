@@ -57,6 +57,9 @@
     <Compile Include="Misc\CmdVote.cs" />
     <Compile Include="Moderation\CmdSay.cs" />
     <Compile Include="Moderation\CmdVoteKick.cs" />
+    <Compile Include="Moderation\CmdWho.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
